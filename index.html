@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <style>
+        body {
+            background-color: #e4ebf2;
+        }
+        
+        input {
+            cursor: pointer;
+            height: 25px;
+        }
+        
+        #val {
+            height: 10px;
+            width: 63px;
+        }
+        
+        h3 {
+            margin-right: -1cm;
+            color: rgb(23, 57, 171);
+        }
+        
+        h1 {
+            color: rgb(222, 92, 44);
+        }
+        
+        #div2 {
+            cursor: pointer;
+            margin-left: -88px;
+            height: 25px;
+        }
+        
+        div {
+            border: 1px solid rgb(93, 101, 135);
+            background-color: #b7bade;
+            text-align: center;
+            margin-top: -0.58cm;
+            margin-right: -0.2cm;
+            margin-left: -8px;
+        }
+        
+        box {
+            margin-right: -130px;
+        }
+        
+        #sendButton {
+            margin-right: -5px;
+        }
+    </style>
+    <script type="text/javascript">
+        let accounts = [];
+
+        function demoApp() {
+
+            console.log(ethereum.network);
+
+            document.getElementById('div2').addEventListener('click', () => {
+
+                if (typeof window.ethereum == 'undefined') {
+                    alert('Please install MetaMask');
+                }
+                getAccount();
+            });
+
+            // Sending Ethereum to an address
+            document.getElementById("sendButton").addEventListener('click', () => {
+                //check for Navigation Timing API support
+                if (window.performance) {
+                    console.info("window.performance works fine on this browser");
+                }
+                if (performance != 1) {
+                    getAccount();
+                }
+                let to = document.getElementById("addr").value.toString();
+                let amount = parseFloat(document.getElementById('val').value) * 1000000000000000000;
+                // console.log(amount);
+                let value = "0x" + Number(amount).toString(16);
+                ethereum
+                    .request({
+                        method: 'eth_sendTransaction',
+                        params: [{
+                            from: accounts[0],
+                            to,
+                            value,
+                            // gasPrice: '0x09184e72a000',
+                            // gas: '0x2710',
+                        }],
+                    })
+                    .then((txHash) => {
+                        document.getElementById("showTxHash").innerText = txHash;
+                    })
+                    .catch((error) => console.error)
+            });
+
+            document.getElementById('viewTx').addEventListener('click', () => {
+                let addr = document.getElementById("showTxHash").innerText;
+                let netVer = ethereum.networkVersion;
+                if (netVer == 4) {
+                    open(`https://rinkeby.etherscan.io/tx/${addr}`);
+                } else if (netVer == 256) {
+                    open(`https://testnet.hecoinfo.com/${addr}`);
+                }
+            })
+        }
+
+        async function getAccount() {
+            accounts = await ethereum.request({
+                method: 'eth_requestAccounts'
+            });
+        }
+
+
+        // event
+        ethereum.on('accountsChanged', function(accounts) {
+            alert(`Account currently being connected: ${accounts[0]}`);
+        });
+
+
+        ethereum.on('chainChanged', (chainId) => {
+            // Handle the new chain.
+            // Correctly handling chain changes can be complicated.
+            // We recommend reloading the page unless you have good reason not to.
+            window.location.reload();
+        });
+
+        window.onload = demoApp;
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>Enter the recipient's address in the text box below：</h1><label>
+        Address: </Address><textarea type="text" id="addr" title="请输入Eth格式地址！"></textarea><br> 
+        amount: <input type="text" , value="" id="val" title="请输入要转账的Token数量！">
+        <input type="button" value="Send Token" id="sendButton" title="请点击，发送！">
+        <h3> TxHash: <span id="showTxHash"></span> </h3>
+        <box>
+        <input id="div2" type="button" title="请点击，连接MetaMask钱包" value="Connect to MetaMask">
+        <input type="button" value="View on block explorer" id="viewTx" title="请点击，查看交易详情">
+        </box>
+    </div>
+</body>
+
+</html>
