@@ -1,0 +1,45 @@
+body {
+    background-color: #e4ebf2;
+}
+
+input {
+    cursor: pointer;
+    height: 25px;
+}
+
+#val {
+    height: 10px;
+    width: 63px;
+}
+
+h3 {
+    margin-right: -1cm;
+    color: rgb(23, 57, 171);
+}
+
+h1 {
+    color: rgb(222, 92, 44);
+}
+
+button {
+    cursor: pointer;
+    margin-left: -88px;
+    height: 25px;
+}
+
+div {
+    border: 1px solid rgb(93, 101, 135);
+    background-color: #b7bade;
+    text-align: center;
+    margin-top: -0.58cm;
+    margin-right: -0.2cm;
+    margin-left: -8px;
+}
+
+box {
+    margin-right: -130px;
+}
+
+#sendButton {
+    margin-right: -5px;
+}

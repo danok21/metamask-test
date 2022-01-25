@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script>
+        onload = function() {
+            document.getElementById("button").addEventListener('click', () => {
+
+                if (typeof window.ethereum == 'undefined') {
+                    alert('Please install MetaMask');
+                }
+                getAccount();
+            });
+        }
+
+        async function getAccount() {
+            const accounts = await ethereum.request({
+                method: 'eth_requestAccounts'
+            });
+            alert(`Current connected account: ${accounts[0]}`);
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="Connect to MetaMask" id="button">
+</body>
+
+</html>
