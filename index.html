@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta chAppet="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DemoApp</title>
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 
 <body>
     <div>
-        <h1>Enter the recipient's address in the text box below：</h1><label>
-        Address: </Address><textarea type="text" id="addr" title="请输入Eth格式地址！"></textarea><br> 
-        amount: <input type="text" , value="" id="val" title="请输入要转账的Token数量！">
+        <h1>Enter the recipient's address in the text box below:</h1>
+        Address: </Address><textarea type="text" id="addr" title="请输入Eth格式地址！"></textarea><br>
+        amount: <input type="text" , value="" , placeholder="ether" id="val" title="请输入要转账的Token数量！">
         <input type="button" value="Send Token" id="sendButton" title="请点击，发送！">
         <h3> TxHash: <span id="showTxHash"></span> </h3>
         <box>
@@ -21,7 +21,7 @@
         <input type="button" value="View on block explorer" id="viewTx" title="请点击，查看交易详情">
         </box>
     </div>
-    <script src="js/index.js"></script>
+    <script src="dist/bundle.js"></script>
 </body>
 
 </html>

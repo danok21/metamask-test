@@ -4,7 +4,7 @@ var fs = require('fs');
 // 创建服务器
 http.createServer((request, response) => {
     if (request.url == '/') {
-        fs.readFile("./index02.html", function(err, data) {
+        fs.readFile("./index.html", function(err, data) {
             if (err) {
                 console.log(err);
                 // HTTP 状态码: 404 : NOT FOUND
